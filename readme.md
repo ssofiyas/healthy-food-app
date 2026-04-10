@@ -1,0 +1,1 @@
+Tämä on Web-kehitys 1 (Front-end) -kurssin toinen harjoitustyö. Sovelluksen tarkoituksena on osoittaa AJAX-tekniikan hallintaa ja ulkoisen REST-rajapinnan (API) hyödyntämistä natiivilla JavaScriptillä.
