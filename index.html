@@ -2,21 +2,25 @@
 <html lang="fi">
 <head>
     <meta charset="UTF-8">
-    <title>Reseptihaku</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Healthy Bites</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="container">
-        <h1>🥗 Globaalit Reseptit</h1>
-        
-        <div class="search-box">
-            <input type="text" id="hakusana" placeholder="Esim. Chicken...">
-            <button id="haku-nappi">Etsi reseptiä</button>
+    <div class="app-container">
+        <header>
+            <h1>🥗 Global Healthy Bites</h1>
+            <p>Etsi terveellisiä reseptejä ympäri maailmaa</p>
+        </header>
+
+        <div class="search-section">
+            <input type="text" id="hakusana" placeholder="Kirjoita raaka-aine (esim. salmon, chicken)...">
+            <button id="haku-nappi">Hae reseptit</button>
         </div>
 
-        <div id="tulokset">
-            <p>Tulokset ilmestyvät tähän...</p>
+        <div id="tulokset" class="recipe-grid">
+            <p class="info-text">Kirjoita hakusana ja paina nappia aloittaaksesi!</p>
         </div>
     </div>
 
