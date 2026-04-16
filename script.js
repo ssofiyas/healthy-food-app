@@ -1,61 +1,74 @@
-const hakuNappi = document.querySelector('#haku-nappi');
-const hakusanaKentta = document.querySelector('#hakusana');
-const tulosAlue = document.querySelector('#tulokset');
+// Haetaan elementit muuttujiin
+const searchBtn = document.querySelector('#search-btn');
+const userInput = document.querySelector('#user-input');
+const resultsArea = document.querySelector('#results');
 
-// tapahtumankuuntelija, joka reagoi napin klikkaukseen
-hakuNappi.addEventListener('click', () => {
-    const hakusana = hakusanaKentta.value.trim();
-    
-    if (hakusana === "") {
-        alert("Ole hyvä ja kirjoita hakusana!");
-        return;
-    }
-
-    haeReseptit(hakusana);
+// Ladataan automaattisesti reseptejä, kun sivu avataan
+window.addEventListener('DOMContentLoaded', () => {
+    fetchRecipes('Pasta');
 });
 
-// AJAX funktio, joka hakee reseptit API:sta
-async function haeReseptit(haku) {
-    tulosAlue.innerHTML = "<p class='info-text'>Etsitään reseptejä...</p>";
+// Hakunapin toiminnallisuus
+searchBtn.addEventListener('click', () => {
+    const query = userInput.value.trim();
+    if (query !== "") {
+        fetchRecipes(query);
+    } else {
+        alert("Kirjoita jotain hakukenttään!");
+    }
+});
 
-    const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${haku}`;
+// Haku enter-näppäimellä
+userInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        searchBtn.click();
+    }
+});
+
+// Haetaan data API:sta
+async function fetchRecipes(query) {
+    resultsArea.innerHTML = "<p class='info-text'>Etsitään reseptejä...</p>";
+
+    const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`;
 
     try {
-        const vastaus = await fetch(url);
-        const data = await vastaus.json();
-
-        console.log("Data saatu:", data); // Voit katsoa tätä selaimen konsolissa (F12)
-        naytaTulokset(data.meals);
-
-    } catch (virhe) {
-        console.error("Virhe haussa:", virhe);
-        tulosAlue.innerHTML = "<p class='info-text'>Yhteysvirhe. Yritä uudelleen.</p>";
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        // Lähetetään saatu data näytettäväksi
+        displayResults(data.meals);
+    } catch (error) {
+        console.error("Virhe:", error);
+        resultsArea.innerHTML = "<p class='info-text'>Yhteysvirhe, yritä uudelleen.</p>";
     }
 }
 
-// funktio, joka vaihtaa tulosalueen sisällön reseptikorteiksi
-function naytaTulokset(reseptit) {
-    tulosAlue.innerHTML = ""; // Tyhjennetään edellinen haku
+// Luodaan reseptikortit sivulle
+function displayResults(meals) {
+    resultsArea.innerHTML = ""; // Tyhjennetään vanhat tulokset
 
-    if (!reseptit) {
-        tulosAlue.innerHTML = "<p class='info-text'>Ei tuloksia. Kokeile toista hakusanaa (esim. pasta).</p>";
+    if (!meals) {
+        resultsArea.innerHTML = "<p class='info-text'>Ei tuloksia. Kokeile toista sanaa.</p>";
         return;
     }
 
-    // oma kortti jokaiselle reseptille
-    reseptit.forEach(resepti => {
-        const kortti = document.createElement('div');
-        kortti.className = 'recipe-card';
+    // Käydään lista läpi ja rakennetaan kortit
+    meals.forEach(meal => {
+        const card = document.createElement('div');
+        card.className = 'recipe-card';
 
-        kortti.innerHTML = `
-            <img src="${resepti.strMealThumb}" alt="${resepti.strMeal}">
+        card.innerHTML = `
+            <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
             <div class="card-info">
-                <h3>${resepti.strMeal}</h3>
-                <p>Kategoria: ${resepti.strCategory}</p>
-                <p>Alue: ${resepti.strArea}</p>
+                <div>
+                    <h3>${meal.strMeal}</h3>
+                    <p><strong>Kategoria:</strong> ${meal.strCategory}</p>
+                    <p><strong>Maa:</strong> ${meal.strArea}</p>
+                </div>
+                <a href="${meal.strSource || meal.strYoutube}" target="_blank" class="recipe-link">Katso resepti</a>
             </div>
         `;
 
-        tulosAlue.appendChild(kortti);
+        resultsArea.appendChild(card);
     });
 }

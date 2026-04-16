@@ -78,6 +78,25 @@ button:hover {
     transform: scale(0.97);
 }
 
+/* Recipe link */   
+.recipe-link {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 15px;
+    background-color: #007aff;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.recipe-link:hover {
+    background-color: #0056b3;
+}
+
+
 /* Recipe grid */
 
 .recipe-grid {
