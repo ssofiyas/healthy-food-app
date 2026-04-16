@@ -1,160 +1,90 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif;
-    background: #f2f2f6;
-    color: #1c1c1e;
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     min-height: 100vh;
 }
 
 .app-container {
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 30px 20px;
+    padding: 40px 20px;
 }
 
-header {
-    text-align: center;
-    margin-bottom: 35px;
-}
-
-header h1 {
-    font-size: 2rem;
-    margin-bottom: 8px;
-}
-
-header p {
-    color: #6c6c70;
-    font-size: 0.95rem;
-}
-
-/* Search section*/
+header { text-align: center; margin-bottom: 40px; }
 
 .search-section {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     justify-content: center;
-    margin-bottom: 40px;
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(10px);
-    padding: 12px 20px;
-    border-radius: 50px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px; 
 }
 
-input {
-    flex: 1;
-    padding: 12px 18px;
-    border: none;
-    background: white;
-    border-radius: 40px;
-    font-size: 1rem;
-    outline: none;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
+input { padding: 12px 25px; width: 300px; border-radius: 30px; border: 1px solid #ddd; outline: none; }
 
-input:focus {
-    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2);
-}
-
-button {
-    padding: 12px 24px;
-    background: #007aff;
+button#search-btn {
+    padding: 12px 30px;
+    background-color: #27ae60;
     color: white;
     border: none;
-    border-radius: 40px;
-    font-size: 1rem;
-    font-weight: 600;
+    border-radius: 30px;
     cursor: pointer;
-    transition: 0.2s;
+    font-weight: bold;
 }
 
-button:hover {
-    background: #005fc1;
-    transform: scale(0.97);
+
+.categories {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 40px;
 }
 
-/* Recipe link */   
-.recipe-link {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 8px 15px;
-    background-color: #007aff;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    font-size: 14px;
+.category-btn {
+    background: white;
+    color: #27ae60;
+    border: 2px solid #27ae60;
+    padding: 8px 18px;
+    border-radius: 20px;
+    cursor: pointer;
     font-weight: 600;
-    transition: 0.2s;
+    transition: 0.3s;
 }
 
-.recipe-link:hover {
-    background-color: #0056b3;
+.category-btn:hover {
+    background: #27ae60;
+    color: white;
 }
-
-
-/* Recipe grid */
 
 .recipe-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
 }
 
-/* Recipe cards */
 .recipe-card {
     background: white;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    transition: 0.2s;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
 }
 
-.recipe-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-}
+.recipe-card img { width: 100%; height: 220px; object-fit: cover; }
 
-.recipe-card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-}
+.card-info { padding: 20px; flex-grow: 1; }
 
-.card-info {
-    padding: 15px;
-}
-
-.card-info h3 {
-    font-size: 1.1rem;
-    margin-bottom: 8px;
-}
-
-.info-text {
+.recipe-link {
+    display: block;
     text-align: center;
-    grid-column: 1 / -1;
-    padding: 40px;
-    color: #8e8e93;
-    background: rgba(255, 255, 255, 0.6);
-    border-radius: 30px;
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #007aff;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
 }
 
-/* Mobile friendly */
-@media (max-width: 600px) {
-    .app-container {
-        padding: 20px 15px;
-    }
-    
-    .search-section {
-        flex-direction: column;
-        border-radius: 30px;
-    }
-    
-    button {
-        width: 100%;
-    }
-}
+.info-text { text-align: center; grid-column: 1 / -1; }
